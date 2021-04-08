@@ -1,6 +1,6 @@
 package com.birdsanctuary;
 
-public class Penguin extends Bird implements Swimmable {
+public class Penguin extends Bird implements Swimmable, Eatable {
     static int count;
 
 
@@ -12,6 +12,11 @@ public class Penguin extends Bird implements Swimmable {
     @Override
     public void incrementCount() {
         count++;
+    }
+
+    @Override
+    void decrementCount() {
+        count--;
     }
 
 //    @Override

@@ -1,13 +1,15 @@
 package com.birdsanctuary;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 public class BirdSanctuary {
 
-    private  List<Bird> allBirds = new ArrayList<>();
+//    private  List<Bird> allBirds = new ArrayList<>();
 
-    //making this class - instance class
+    private Set<Bird> allBirds = new HashSet<>();
+
+    //instance class
     static BirdSanctuary instance;
 
     //constructor
@@ -15,24 +17,35 @@ public class BirdSanctuary {
     }
 
     //instance only if null it creates or else returns instance
-    static BirdSanctuary getInstance(){
+    public synchronized static BirdSanctuary getInstance(){
         if (instance == null) {
             instance = new BirdSanctuary();
-//            return instance;
         }
         return instance;
-//        return null;
     }
 
     //method for adding birds and getting count
     public void add(Bird bird) {
-        allBirds.add(bird);
-        bird.incrementCount();
+        boolean birdTest = allBirds.stream().anyMatch(i -> i.equals(bird));
+        if (!birdTest) {
+            allBirds.add(bird);
+            bird.incrementCount();
+        }
+        else {
+            System.out.println("Bird is already added.");
+        }
     }
 
-    public void eatble(){
+    public void remove(Bird bird){
+        allBirds.remove(bird);
+        bird.decrementCount();
+    }
+
+    public void eatable(){
         for ( Bird bird : allBirds ) {
-            bird.eat();
+            if (bird instanceof Eatable){
+                ((Eatable) bird).eat();
+            }
         }
     }
 

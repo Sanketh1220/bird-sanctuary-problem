@@ -1,6 +1,6 @@
 package com.birdsanctuary;
 
-public class Parrot extends Bird implements Flyable {
+public class Parrot extends Bird implements Flyable, Eatable {
     static int count;
     public void fly(){
         System.out.println("Parrot is flying");
@@ -14,6 +14,11 @@ public class Parrot extends Bird implements Flyable {
     @Override
     public void incrementCount() {
         count++;
+    }
+
+    @Override
+    void decrementCount() {
+        count--;
     }
 
 //    @Override

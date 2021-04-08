@@ -1,6 +1,6 @@
 package com.birdsanctuary;
 
-public class Duck extends Bird implements Flyable, Swimmable {
+public class Duck extends Bird implements Flyable, Swimmable, Eatable {
     static int count;
     public void fly (){
         System.out.println("Duck is flying");
@@ -16,6 +16,11 @@ public class Duck extends Bird implements Flyable, Swimmable {
         count++;
     }
 
+    @Override
+    void decrementCount() {
+        count--;
+    }
+
 //    @Override
 //    public int getCount() {
 //        return 0;
@@ -27,4 +32,3 @@ public class Duck extends Bird implements Flyable, Swimmable {
     }
 
 }
-
