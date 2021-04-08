@@ -1,12 +1,14 @@
 package com.birdsanctuary;
 
-public class Penguin extends Bird implements Swimmable {
+public class Parrot extends Bird implements Flyable {
     static int count;
-
+    public void fly(){
+        System.out.println("Parrot is flying");
+    }
 
     @Override
     public void eat() {
-        System.out.println("Penguin is eating");
+        System.out.println("Parrot is eating fruits");
     }
 
     @Override
@@ -18,11 +20,5 @@ public class Penguin extends Bird implements Swimmable {
 //    public int getCount() {
 //        return 0;
 //    }
-
-    @Override
-    public void swim() {
-        System.out.println("Pengiun is swimming");
-    }
 }
-
 
