@@ -3,30 +3,26 @@ package com.birdsanctuary;
 public class Penguin extends Bird implements Swimmable, Eatable {
     static int count;
 
+    public Penguin() {
+    }
 
-    @Override
     public void eat() {
         System.out.println("Penguin is eating");
     }
 
-    @Override
     public void incrementCount() {
-        count++;
+        ++count;
     }
 
-    @Override
     void decrementCount() {
-        count--;
+        --count;
     }
 
-//    @Override
-//    public int getCount() {
-//        return 0;
-//    }
+    int getCount() {
+        return count;
+    }
 
-    @Override
     public void swim() {
         System.out.println("Pengiun is swimming");
     }
 }
-

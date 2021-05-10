@@ -1,67 +1,73 @@
 package com.birdsanctuary;
 
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
 public class BirdSanctuary {
-
-//    private  List<Bird> allBirds = new ArrayList<>();
-
-    private Set<Bird> allBirds = new HashSet<>();
-
-    //instance class
+    private Set<Bird> allBirds = new HashSet();
     static BirdSanctuary instance;
 
-    //constructor
-    private BirdSanctuary(){
+    private BirdSanctuary() {
     }
 
-    //instance only if null it creates or else returns instance
-    public synchronized static BirdSanctuary getInstance(){
+    public static synchronized BirdSanctuary getInstance() {
         if (instance == null) {
             instance = new BirdSanctuary();
         }
+
         return instance;
     }
 
-    //method for adding birds and getting count
-    public void add(Bird bird) {
-        boolean birdTest = allBirds.stream().anyMatch(i -> i.equals(bird));
-        if (!birdTest) {
-            allBirds.add(bird);
-            bird.incrementCount();
+    public void add(Bird bird) throws Exception {
+        boolean var2 = this.allBirds.stream().anyMatch((i) -> {
+            return i.equals(bird);
+        });
+
+        try {
+            if (bird == null) {
+                throw new BirdSanctuaryAddException("Bird is null");
+            }
+
+            if (this.allBirds.add(bird)) {
+                bird.incrementCount();
+            }
+        } catch (BirdSanctuaryAddException var4) {
+            var4.printStackTrace();
         }
-        else {
-            System.out.println("Bird is already added.");
-        }
+
     }
 
-    public void remove(Bird bird){
-        allBirds.remove(bird);
+    public void remove(Bird bird) {
+        this.allBirds.remove(bird);
         bird.decrementCount();
     }
 
-    public void eatable(){
-        for ( Bird bird : allBirds ) {
-            if (bird instanceof Eatable){
-                ((Eatable) bird).eat();
-            }
-        }
+    public void eatable() {
+        this.allBirds.stream().filter((bird) -> bird instanceof Eatable).forEach((b) -> ((Eatable) b).eat());
     }
 
-    public void swimmable(){
-        for ( Bird bird : allBirds ) {
-            if (bird instanceof Swimmable){
-                ((Swimmable) bird).swim();
-            }
-        }
+    public void swimmable() {
+//        Iterator var1 = this.allBirds.iterator();
+//
+//        while(var1.hasNext()) {
+//            Bird bird = (Bird)var1.next();
+//            if (bird instanceof Swimmable) {
+//                ((Swimmable)bird).swim();
+//            }
+//        }
+        this.allBirds.stream().filter((bird) -> bird instanceof Swimmable).forEach((b) -> ((Swimmable) b) .swim());
     }
 
     public void flyable() {
-        for ( Bird bird : allBirds ) {
-            if (bird instanceof Flyable){
-                ((Flyable)bird).fly();
-            }
-        }
+//        Iterator var1 = this.allBirds.iterator();
+//
+//        while(var1.hasNext()) {
+//            Bird bird = (Bird)var1.next();
+//            if (bird instanceof Flyable) {
+//                ((Flyable)bird).fly();
+//            }
+//        }
+        this.allBirds.stream().filter((bird) -> bird instanceof Flyable).forEach((b) -> ((Flyable) b) .fly());
     }
 }

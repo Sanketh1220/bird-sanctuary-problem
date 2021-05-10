@@ -2,15 +2,17 @@ package com.birdsanctuary;
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
 
         BirdSanctuary birdSanctuary = BirdSanctuary.getInstance();
+        BirdFactory birdFactory = BirdFactory.getInstance();
 
-        Penguin firstPenguin = new Penguin();
-        Duck firstDuck = new Duck();
-        Parrot firstParrot = new Parrot();
-        Duck newDuck = new Duck();
-        ToyDuck toyDuck = new ToyDuck();
+        Penguin firstPenguin = (Penguin) birdFactory.getBird(BirdFactory.BirdType.PENGUIN);
+        Duck firstDuck = (Duck) birdFactory.getBird(BirdFactory.BirdType.DUCK);
+        Parrot firstParrot = (Parrot) birdFactory.getBird(BirdFactory.BirdType.PARROT);
+        Duck newDuck = (Duck) birdFactory.getBird(BirdFactory.BirdType.DUCK);
+        ToyDuck toyDuck = (ToyDuck)  birdFactory.getBird(BirdFactory.BirdType.TOYDUCK);
+        Parrot nullParrot = null;
 
         birdSanctuary.add(firstDuck);
         birdSanctuary.add(firstParrot);
@@ -18,8 +20,8 @@ public class Main {
         birdSanctuary.add(newDuck);
         birdSanctuary.add(toyDuck);
         birdSanctuary.add(toyDuck);
+        birdSanctuary.add((Bird)nullParrot);
         birdSanctuary.remove(newDuck);
-
         birdSanctuary.eatable();
         birdSanctuary.swimmable();
         birdSanctuary.flyable();
@@ -30,4 +32,3 @@ public class Main {
         System.out.println("Count of ToyDuck in bird sanctuary: " + ToyDuck.count);
     }
 }
-
